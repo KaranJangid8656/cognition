@@ -1,0 +1,269 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 240 10% 3.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 240 10% 3.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 240 10% 3.9%;
+    --primary: 328 100% 54%; /* Neon pink */
+    --primary-foreground: 210 20% 98%;
+    --secondary: 240 4.8% 95.9%;
+    --secondary-foreground: 240 5.9% 10%;
+    --muted: 240 4.8% 95.9%;
+    --muted-foreground: 240 3.8% 46.1%;
+    --accent: 240 4.8% 95.9%;
+    --accent-foreground: 240 5.9% 10%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 240 5.9% 90%;
+    --input: 240 5.9% 90%;
+    --ring: 142 76% 36%;
+    --radius: 0rem;
+  }
+
+  .dark {
+    --background: 0 0% 0%;
+    --foreground: 0 0% 98%;
+    --card: 0 0% 0%;
+    --card-foreground: 0 0% 98%;
+    --popover: 0 0% 0%;
+    --popover-foreground: 0 0% 98%;
+    --primary: 328 100% 54%; /* Neon pink */
+    --primary-foreground: 210 20% 98%;
+    --secondary: 240 3.7% 15.9%;
+    --secondary-foreground: 0 0% 98%;
+    --muted: 0 0% 15%;
+    --muted-foreground: 240 5% 64.9%;
+    --accent: 240 3.7% 15.9%;
+    --accent-foreground: 0 0% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 240 3.7% 15.9%;
+    --input: 240 3.7% 15.9%;
+    --ring: 142 76% 36%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+/* Futuristic card styles */
+.dark .card {
+  background: linear-gradient(145deg, #0a0a0a, #000000);
+  box-shadow: 5px 5px 10px #000000, -5px -5px 10px #0a0a0a;
+  border: 1px solid rgba(236, 72, 153, 0.1);
+}
+
+/* Glowing accents */
+.glow {
+  position: relative;
+}
+
+.glow::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  box-shadow: 0 0 20px 2px rgba(236, 72, 153, 0.5);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.glow:hover::after {
+  opacity: 1;
+}
+
+/* Animations */
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+.animate-pulse {
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(0) translateX(0);
+  }
+  25% {
+    transform: translateY(-10px) translateX(10px);
+  }
+  50% {
+    transform: translateY(0) translateX(20px);
+  }
+  75% {
+    transform: translateY(10px) translateX(10px);
+  }
+  100% {
+    transform: translateY(0) translateX(0);
+  }
+}
+
+/* Scan line animation */
+@keyframes scan {
+  0% {
+    top: -10%;
+  }
+  100% {
+    top: 110%;
+  }
+}
+
+.animate-scan {
+  animation: scan 4s linear infinite;
+  top: -10%;
+}
+
+/* Stroke animation for SVG paths */
+@keyframes dash {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+.animate-dash {
+  animation: dash 2s linear forwards;
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.scrollbar-hide {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+/* Status Badge Animations */
+
+/* Exploding animation - shake and pulse with shockwave */
+@keyframes exploding {
+  0%,
+  100% {
+    transform: scale(1) rotate(0deg);
+  }
+  10% {
+    transform: scale(1.05) rotate(2deg);
+  }
+  20% {
+    transform: scale(1.05) rotate(-2deg);
+  }
+  30% {
+    transform: scale(1.05) rotate(2deg);
+  }
+  40% {
+    transform: scale(1) rotate(0deg);
+  }
+  50% {
+    transform: scale(1.02);
+  }
+  60% {
+    transform: scale(1);
+  }
+}
+
+.animate-exploding {
+  animation: exploding 2s ease-in-out infinite;
+}
+
+@keyframes exploding-shockwave {
+  0% {
+    transform: scale(1);
+    opacity: 0.7;
+  }
+  100% {
+    transform: scale(1.8);
+    opacity: 0;
+  }
+}
+
+.animate-exploding-shockwave {
+  animation: exploding-shockwave 1.5s ease-out infinite;
+}
+
+/* Rising animation - float up with trail */
+@keyframes rising {
+  0%,
+  100% {
+    transform: translateY(0);
+    box-shadow: 0 5px 15px -3px rgba(249, 115, 22, 0.4);
+  }
+  50% {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 20px -5px rgba(249, 115, 22, 0.6), 0 0 15px -3px rgba(249, 115, 22, 0.6);
+  }
+}
+
+.animate-rising {
+  animation: rising 2s ease-in-out infinite;
+}
+
+/* Stable animation - gentle pulse */
+@keyframes stable {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.8;
+  }
+}
+
+.animate-stable {
+  animation: stable 3s ease-in-out infinite;
+}
+
+/* Cooling animation - fade and slide down with vapor */
+@keyframes cooling {
+  0%,
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  50% {
+    transform: translateY(2px);
+    opacity: 0.7;
+  }
+}
+
+.animate-cooling {
+  animation: cooling 3s ease-in-out infinite;
+}
+
+/* Vapor animation for cooling */
+@keyframes vapor {
+  0% {
+    transform: translateY(0) scale(1);
+    opacity: 0.5;
+  }
+  100% {
+    transform: translateY(-10px) scale(1.5);
+    opacity: 0;
+  }
+}
+
+.animate-vapor {
+  animation: vapor 2s ease-out infinite;
+}
